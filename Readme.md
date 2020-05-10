@@ -31,6 +31,14 @@ $ make
 
 ## Run everything
 
+Install the models as follows
+```  
+models/##/model_enc.h5
+models/##/tokenizer.pickle
+models/##/model_dec.h5
+```
+where `##` is the number of the personn answering (number of the model).
+
 1. Launch the server (*make sure to use the venv environnement*)
 ```
 $ python python/main.py
