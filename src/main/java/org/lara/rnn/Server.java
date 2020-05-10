@@ -8,7 +8,7 @@ import org.lara.rnn.Message.Command;
 
 public class Server {
 
-    final private int PORT = 9988;
+    final private int PORT = 9987;
     private Socket socket;
     private OutputStream os;
     private InputStream is;
@@ -26,6 +26,14 @@ public class Server {
                       .setType(Command.CommandType.SHUTDOWN)
                       .setName("Shuting down")
                       .setData("Shutdown server.")
+                      .build();
+    }
+
+    public Command makeSwitchPerson(int personn) {
+        return Command.newBuilder()
+                      .setType(Command.CommandType.SWITCH_PERSON)
+                      .setName("Switching to personn " + personn )
+                      .setData(Integer.toString(personn))
                       .build();
     }
 
@@ -60,6 +68,10 @@ public class Server {
     public void shutdownServer() {
         send_without_answer(makeShutdown());
         closeSock();
+    }
+
+    public void switchPersonn(int personn) {
+        send_without_answer(makeSwitchPerson(personn));
     }
 
     public void openSock() {
