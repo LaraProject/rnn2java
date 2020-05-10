@@ -35,7 +35,7 @@ $ make
 ```
 $ python python/main.py
 ```
-2. In an other window
+2. Run the client in another terminal
 ```
 $ java -jar target/RNN2Java-0.0.1-SNAPSHOT.jar
 ```
