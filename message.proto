@@ -1,4 +1,4 @@
-option java_package = "com.zlalanne";
+option java_package = "org.lara.rnn";
 
 message Command {
 

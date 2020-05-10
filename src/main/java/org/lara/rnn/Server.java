@@ -1,10 +1,10 @@
-package com.zlalanne;
+package org.lara.rnn;
 
 import java.net.*; 
 import java.io.*; 
 import java.util.concurrent.TimeUnit;
 
-import com.zlalanne.Message.Command;
+import org.lara.rnn.Message.Command;
 
 public class Server {
 

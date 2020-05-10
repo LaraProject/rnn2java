@@ -6,7 +6,7 @@ CC          := protoc
 SRC         := message.proto
 
 PYTHON_OUT  := python/message_pb2.py
-JAVA_OUT    := src/main/java/com/zlalanne/Message.java
+JAVA_OUT    := src/main/java/
 
 all: $(PYTHON_OUT) $(JAVA_OUT)
 
@@ -14,7 +14,7 @@ $(PYTHON_OUT): $(SRC)
 	$(CC) $(SRC) --python_out=$(dir $@)
 
 $(JAVA_OUT): $(SRC)
-	$(CC) $(SRC) --java_out=$(dir $@)../../
+	$(CC) $(SRC) --java_out=$(dir $@)
 
 clean:
 	$(RM) $(PYTHON_OUT)

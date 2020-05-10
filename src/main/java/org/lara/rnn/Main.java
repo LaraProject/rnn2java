@@ -1,4 +1,4 @@
-package com.zlalanne;
+package org.lara.rnn;
 
 import java.util.concurrent.TimeUnit;
 
