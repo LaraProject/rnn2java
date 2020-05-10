@@ -6,7 +6,13 @@ package com.zlalanne;
 public final class Message {
   private Message() {}
   public static void registerAllExtensions(
+      com.google.protobuf.ExtensionRegistryLite registry) {
+  }
+
+  public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
+    registerAllExtensions(
+        (com.google.protobuf.ExtensionRegistryLite) registry);
   }
   public interface CommandOrBuilder extends
       // @@protoc_insertion_point(interface_extends:Command)
@@ -14,37 +20,45 @@ public final class Message {
 
     /**
      * <code>required .Command.CommandType type = 1;</code>
+     * @return Whether the type field is set.
      */
     boolean hasType();
     /**
      * <code>required .Command.CommandType type = 1;</code>
+     * @return The type.
      */
     com.zlalanne.Message.Command.CommandType getType();
 
     /**
      * <code>required string name = 2;</code>
+     * @return Whether the name field is set.
      */
     boolean hasName();
     /**
      * <code>required string name = 2;</code>
+     * @return The name.
      */
     java.lang.String getName();
     /**
      * <code>required string name = 2;</code>
+     * @return The bytes for name.
      */
     com.google.protobuf.ByteString
         getNameBytes();
 
     /**
-     * <code>optional string data = 3;</code>
+     * <code>required string data = 3;</code>
+     * @return Whether the data field is set.
      */
     boolean hasData();
     /**
-     * <code>optional string data = 3;</code>
+     * <code>required string data = 3;</code>
+     * @return The data.
      */
     java.lang.String getData();
     /**
-     * <code>optional string data = 3;</code>
+     * <code>required string data = 3;</code>
+     * @return The bytes for data.
      */
     com.google.protobuf.ByteString
         getDataBytes();
@@ -52,37 +66,41 @@ public final class Message {
   /**
    * Protobuf type {@code Command}
    */
-  public static final class Command extends
-      com.google.protobuf.GeneratedMessage implements
+  public  static final class Command extends
+      com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:Command)
       CommandOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use Command.newBuilder() to construct.
-    private Command(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+    private Command(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
-      this.unknownFields = builder.getUnknownFields();
     }
-    private Command(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
-
-    private static final Command defaultInstance;
-    public static Command getDefaultInstance() {
-      return defaultInstance;
+    private Command() {
+      type_ = 0;
+      name_ = "";
+      data_ = "";
     }
 
-    public Command getDefaultInstanceForType() {
-      return defaultInstance;
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new Command();
     }
 
-    private final com.google.protobuf.UnknownFieldSet unknownFields;
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
+    getUnknownFields() {
       return this.unknownFields;
     }
     private Command(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      initFields();
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -94,21 +112,15 @@ public final class Message {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 8: {
               int rawValue = input.readEnum();
+                @SuppressWarnings("deprecation")
               com.zlalanne.Message.Command.CommandType value = com.zlalanne.Message.Command.CommandType.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(1, rawValue);
               } else {
                 bitField0_ |= 0x00000001;
-                type_ = value;
+                type_ = rawValue;
               }
               break;
             }
@@ -124,13 +136,20 @@ public final class Message {
               data_ = bs;
               break;
             }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
+            e).setUnfinishedMessage(this);
       } finally {
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -141,26 +160,12 @@ public final class Message {
       return com.zlalanne.Message.internal_static_Command_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.zlalanne.Message.internal_static_Command_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.zlalanne.Message.Command.class, com.zlalanne.Message.Command.Builder.class);
-    }
-
-    public static com.google.protobuf.Parser<Command> PARSER =
-        new com.google.protobuf.AbstractParser<Command>() {
-      public Command parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new Command(input, extensionRegistry);
-      }
-    };
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<Command> getParserForType() {
-      return PARSER;
     }
 
     /**
@@ -169,40 +174,65 @@ public final class Message {
     public enum CommandType
         implements com.google.protobuf.ProtocolMessageEnum {
       /**
-       * <code>START_TEST = 0;</code>
+       * <code>SWITCH_PERSON = 0;</code>
        */
-      START_TEST(0, 0),
+      SWITCH_PERSON(0),
       /**
-       * <code>RESULTS = 1;</code>
+       * <code>ANSWER = 1;</code>
        */
-      RESULTS(1, 1),
+      ANSWER(1),
       /**
-       * <code>SHUTDOWN = 2;</code>
+       * <code>QUESTION = 2;</code>
        */
-      SHUTDOWN(2, 2),
+      QUESTION(2),
+      /**
+       * <code>SHUTDOWN = 3;</code>
+       */
+      SHUTDOWN(3),
       ;
 
       /**
-       * <code>START_TEST = 0;</code>
+       * <code>SWITCH_PERSON = 0;</code>
        */
-      public static final int START_TEST_VALUE = 0;
+      public static final int SWITCH_PERSON_VALUE = 0;
       /**
-       * <code>RESULTS = 1;</code>
+       * <code>ANSWER = 1;</code>
        */
-      public static final int RESULTS_VALUE = 1;
+      public static final int ANSWER_VALUE = 1;
       /**
-       * <code>SHUTDOWN = 2;</code>
+       * <code>QUESTION = 2;</code>
        */
-      public static final int SHUTDOWN_VALUE = 2;
+      public static final int QUESTION_VALUE = 2;
+      /**
+       * <code>SHUTDOWN = 3;</code>
+       */
+      public static final int SHUTDOWN_VALUE = 3;
 
 
-      public final int getNumber() { return value; }
+      public final int getNumber() {
+        return value;
+      }
 
+      /**
+       * @param value The numeric wire value of the corresponding enum entry.
+       * @return The enum associated with the given numeric wire value.
+       * @deprecated Use {@link #forNumber(int)} instead.
+       */
+      @java.lang.Deprecated
       public static CommandType valueOf(int value) {
+        return forNumber(value);
+      }
+
+      /**
+       * @param value The numeric wire value of the corresponding enum entry.
+       * @return The enum associated with the given numeric wire value.
+       */
+      public static CommandType forNumber(int value) {
         switch (value) {
-          case 0: return START_TEST;
-          case 1: return RESULTS;
-          case 2: return SHUTDOWN;
+          case 0: return SWITCH_PERSON;
+          case 1: return ANSWER;
+          case 2: return QUESTION;
+          case 3: return SHUTDOWN;
           default: return null;
         }
       }
@@ -211,17 +241,17 @@ public final class Message {
           internalGetValueMap() {
         return internalValueMap;
       }
-      private static com.google.protobuf.Internal.EnumLiteMap<CommandType>
-          internalValueMap =
+      private static final com.google.protobuf.Internal.EnumLiteMap<
+          CommandType> internalValueMap =
             new com.google.protobuf.Internal.EnumLiteMap<CommandType>() {
               public CommandType findValueByNumber(int number) {
-                return CommandType.valueOf(number);
+                return CommandType.forNumber(number);
               }
             };
 
       public final com.google.protobuf.Descriptors.EnumValueDescriptor
           getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
+        return getDescriptor().getValues().get(ordinal());
       }
       public final com.google.protobuf.Descriptors.EnumDescriptor
           getDescriptorForType() {
@@ -243,11 +273,9 @@ public final class Message {
         return VALUES[desc.getIndex()];
       }
 
-      private final int index;
       private final int value;
 
-      private CommandType(int index, int value) {
-        this.index = index;
+      private CommandType(int value) {
         this.value = value;
       }
 
@@ -256,30 +284,36 @@ public final class Message {
 
     private int bitField0_;
     public static final int TYPE_FIELD_NUMBER = 1;
-    private com.zlalanne.Message.Command.CommandType type_;
+    private int type_;
     /**
      * <code>required .Command.CommandType type = 1;</code>
+     * @return Whether the type field is set.
      */
     public boolean hasType() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
+      return ((bitField0_ & 0x00000001) != 0);
     }
     /**
      * <code>required .Command.CommandType type = 1;</code>
+     * @return The type.
      */
     public com.zlalanne.Message.Command.CommandType getType() {
-      return type_;
+      @SuppressWarnings("deprecation")
+      com.zlalanne.Message.Command.CommandType result = com.zlalanne.Message.Command.CommandType.valueOf(type_);
+      return result == null ? com.zlalanne.Message.Command.CommandType.SWITCH_PERSON : result;
     }
 
     public static final int NAME_FIELD_NUMBER = 2;
-    private java.lang.Object name_;
+    private volatile java.lang.Object name_;
     /**
      * <code>required string name = 2;</code>
+     * @return Whether the name field is set.
      */
     public boolean hasName() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
+      return ((bitField0_ & 0x00000002) != 0);
     }
     /**
      * <code>required string name = 2;</code>
+     * @return The name.
      */
     public java.lang.String getName() {
       java.lang.Object ref = name_;
@@ -297,6 +331,7 @@ public final class Message {
     }
     /**
      * <code>required string name = 2;</code>
+     * @return The bytes for name.
      */
     public com.google.protobuf.ByteString
         getNameBytes() {
@@ -313,15 +348,17 @@ public final class Message {
     }
 
     public static final int DATA_FIELD_NUMBER = 3;
-    private java.lang.Object data_;
+    private volatile java.lang.Object data_;
     /**
-     * <code>optional string data = 3;</code>
+     * <code>required string data = 3;</code>
+     * @return Whether the data field is set.
      */
     public boolean hasData() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+      return ((bitField0_ & 0x00000004) != 0);
     }
     /**
-     * <code>optional string data = 3;</code>
+     * <code>required string data = 3;</code>
+     * @return The data.
      */
     public java.lang.String getData() {
       java.lang.Object ref = data_;
@@ -338,7 +375,8 @@ public final class Message {
       }
     }
     /**
-     * <code>optional string data = 3;</code>
+     * <code>required string data = 3;</code>
+     * @return The bytes for data.
      */
     public com.google.protobuf.ByteString
         getDataBytes() {
@@ -354,12 +392,8 @@ public final class Message {
       }
     }
 
-    private void initFields() {
-      type_ = com.zlalanne.Message.Command.CommandType.START_TEST;
-      name_ = "";
-      data_ = "";
-    }
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -373,55 +407,113 @@ public final class Message {
         memoizedIsInitialized = 0;
         return false;
       }
+      if (!hasData()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
       memoizedIsInitialized = 1;
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeEnum(1, type_.getNumber());
+      if (((bitField0_ & 0x00000001) != 0)) {
+        output.writeEnum(1, type_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBytes(2, getNameBytes());
+      if (((bitField0_ & 0x00000002) != 0)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, name_);
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeBytes(3, getDataBytes());
+      if (((bitField0_ & 0x00000004) != 0)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, data_);
       }
-      getUnknownFields().writeTo(output);
+      unknownFields.writeTo(output);
     }
 
-    private int memoizedSerializedSize = -1;
+    @java.lang.Override
     public int getSerializedSize() {
-      int size = memoizedSerializedSize;
+      int size = memoizedSize;
       if (size != -1) return size;
 
       size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+      if (((bitField0_ & 0x00000001) != 0)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(1, type_.getNumber());
+          .computeEnumSize(1, type_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, getNameBytes());
+      if (((bitField0_ & 0x00000002) != 0)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, name_);
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(3, getDataBytes());
+      if (((bitField0_ & 0x00000004) != 0)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, data_);
       }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSerializedSize = size;
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.zlalanne.Message.Command)) {
+        return super.equals(obj);
+      }
+      com.zlalanne.Message.Command other = (com.zlalanne.Message.Command) obj;
+
+      if (hasType() != other.hasType()) return false;
+      if (hasType()) {
+        if (type_ != other.type_) return false;
+      }
+      if (hasName() != other.hasName()) return false;
+      if (hasName()) {
+        if (!getName()
+            .equals(other.getName())) return false;
+      }
+      if (hasData() != other.hasData()) return false;
+      if (hasData()) {
+        if (!getData()
+            .equals(other.getData())) return false;
+      }
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasType()) {
+        hash = (37 * hash) + TYPE_FIELD_NUMBER;
+        hash = (53 * hash) + type_;
+      }
+      if (hasName()) {
+        hash = (37 * hash) + NAME_FIELD_NUMBER;
+        hash = (53 * hash) + getName().hashCode();
+      }
+      if (hasData()) {
+        hash = (37 * hash) + DATA_FIELD_NUMBER;
+        hash = (53 * hash) + getData().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.zlalanne.Message.Command parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.zlalanne.Message.Command parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.zlalanne.Message.Command parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -445,46 +537,59 @@ public final class Message {
     }
     public static com.zlalanne.Message.Command parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
     }
     public static com.zlalanne.Message.Command parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.zlalanne.Message.Command parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
     }
     public static com.zlalanne.Message.Command parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.zlalanne.Message.Command parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
     }
     public static com.zlalanne.Message.Command parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    public static Builder newBuilder() { return Builder.create(); }
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.zlalanne.Message.Command prototype) {
-      return newBuilder().mergeFrom(prototype);
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    public static Builder newBuilder(com.zlalanne.Message.Command prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -492,7 +597,7 @@ public final class Message {
      * Protobuf type {@code Command}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:Command)
         com.zlalanne.Message.CommandOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
@@ -500,7 +605,8 @@ public final class Message {
         return com.zlalanne.Message.internal_static_Command_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.zlalanne.Message.internal_static_Command_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -513,21 +619,19 @@ public final class Message {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
       private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
         }
       }
-      private static Builder create() {
-        return new Builder();
-      }
-
+      @java.lang.Override
       public Builder clear() {
         super.clear();
-        type_ = com.zlalanne.Message.Command.CommandType.START_TEST;
+        type_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
         name_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -536,19 +640,18 @@ public final class Message {
         return this;
       }
 
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.zlalanne.Message.internal_static_Command_descriptor;
       }
 
+      @java.lang.Override
       public com.zlalanne.Message.Command getDefaultInstanceForType() {
         return com.zlalanne.Message.Command.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.zlalanne.Message.Command build() {
         com.zlalanne.Message.Command result = buildPartial();
         if (!result.isInitialized()) {
@@ -557,19 +660,20 @@ public final class Message {
         return result;
       }
 
+      @java.lang.Override
       public com.zlalanne.Message.Command buildPartial() {
         com.zlalanne.Message.Command result = new com.zlalanne.Message.Command(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+        if (((from_bitField0_ & 0x00000001) != 0)) {
           to_bitField0_ |= 0x00000001;
         }
         result.type_ = type_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+        if (((from_bitField0_ & 0x00000002) != 0)) {
           to_bitField0_ |= 0x00000002;
         }
         result.name_ = name_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+        if (((from_bitField0_ & 0x00000004) != 0)) {
           to_bitField0_ |= 0x00000004;
         }
         result.data_ = data_;
@@ -578,6 +682,39 @@ public final class Message {
         return result;
       }
 
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.zlalanne.Message.Command) {
           return mergeFrom((com.zlalanne.Message.Command)other);
@@ -602,22 +739,26 @@ public final class Message {
           data_ = other.data_;
           onChanged();
         }
-        this.mergeUnknownFields(other.getUnknownFields());
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         if (!hasType()) {
-          
           return false;
         }
         if (!hasName()) {
-          
+          return false;
+        }
+        if (!hasData()) {
           return false;
         }
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -627,7 +768,7 @@ public final class Message {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
           parsedMessage = (com.zlalanne.Message.Command) e.getUnfinishedMessage();
-          throw e;
+          throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
             mergeFrom(parsedMessage);
@@ -637,37 +778,44 @@ public final class Message {
       }
       private int bitField0_;
 
-      private com.zlalanne.Message.Command.CommandType type_ = com.zlalanne.Message.Command.CommandType.START_TEST;
+      private int type_ = 0;
       /**
        * <code>required .Command.CommandType type = 1;</code>
+       * @return Whether the type field is set.
        */
       public boolean hasType() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
+        return ((bitField0_ & 0x00000001) != 0);
       }
       /**
        * <code>required .Command.CommandType type = 1;</code>
+       * @return The type.
        */
       public com.zlalanne.Message.Command.CommandType getType() {
-        return type_;
+        @SuppressWarnings("deprecation")
+        com.zlalanne.Message.Command.CommandType result = com.zlalanne.Message.Command.CommandType.valueOf(type_);
+        return result == null ? com.zlalanne.Message.Command.CommandType.SWITCH_PERSON : result;
       }
       /**
        * <code>required .Command.CommandType type = 1;</code>
+       * @param value The type to set.
+       * @return This builder for chaining.
        */
       public Builder setType(com.zlalanne.Message.Command.CommandType value) {
         if (value == null) {
           throw new NullPointerException();
         }
         bitField0_ |= 0x00000001;
-        type_ = value;
+        type_ = value.getNumber();
         onChanged();
         return this;
       }
       /**
        * <code>required .Command.CommandType type = 1;</code>
+       * @return This builder for chaining.
        */
       public Builder clearType() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        type_ = com.zlalanne.Message.Command.CommandType.START_TEST;
+        type_ = 0;
         onChanged();
         return this;
       }
@@ -675,12 +823,14 @@ public final class Message {
       private java.lang.Object name_ = "";
       /**
        * <code>required string name = 2;</code>
+       * @return Whether the name field is set.
        */
       public boolean hasName() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
+        return ((bitField0_ & 0x00000002) != 0);
       }
       /**
        * <code>required string name = 2;</code>
+       * @return The name.
        */
       public java.lang.String getName() {
         java.lang.Object ref = name_;
@@ -698,6 +848,7 @@ public final class Message {
       }
       /**
        * <code>required string name = 2;</code>
+       * @return The bytes for name.
        */
       public com.google.protobuf.ByteString
           getNameBytes() {
@@ -714,6 +865,8 @@ public final class Message {
       }
       /**
        * <code>required string name = 2;</code>
+       * @param value The name to set.
+       * @return This builder for chaining.
        */
       public Builder setName(
           java.lang.String value) {
@@ -727,6 +880,7 @@ public final class Message {
       }
       /**
        * <code>required string name = 2;</code>
+       * @return This builder for chaining.
        */
       public Builder clearName() {
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -736,6 +890,8 @@ public final class Message {
       }
       /**
        * <code>required string name = 2;</code>
+       * @param value The bytes for name to set.
+       * @return This builder for chaining.
        */
       public Builder setNameBytes(
           com.google.protobuf.ByteString value) {
@@ -750,13 +906,15 @@ public final class Message {
 
       private java.lang.Object data_ = "";
       /**
-       * <code>optional string data = 3;</code>
+       * <code>required string data = 3;</code>
+       * @return Whether the data field is set.
        */
       public boolean hasData() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
+        return ((bitField0_ & 0x00000004) != 0);
       }
       /**
-       * <code>optional string data = 3;</code>
+       * <code>required string data = 3;</code>
+       * @return The data.
        */
       public java.lang.String getData() {
         java.lang.Object ref = data_;
@@ -773,7 +931,8 @@ public final class Message {
         }
       }
       /**
-       * <code>optional string data = 3;</code>
+       * <code>required string data = 3;</code>
+       * @return The bytes for data.
        */
       public com.google.protobuf.ByteString
           getDataBytes() {
@@ -789,7 +948,9 @@ public final class Message {
         }
       }
       /**
-       * <code>optional string data = 3;</code>
+       * <code>required string data = 3;</code>
+       * @param value The data to set.
+       * @return This builder for chaining.
        */
       public Builder setData(
           java.lang.String value) {
@@ -802,7 +963,8 @@ public final class Message {
         return this;
       }
       /**
-       * <code>optional string data = 3;</code>
+       * <code>required string data = 3;</code>
+       * @return This builder for chaining.
        */
       public Builder clearData() {
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -811,7 +973,9 @@ public final class Message {
         return this;
       }
       /**
-       * <code>optional string data = 3;</code>
+       * <code>required string data = 3;</code>
+       * @param value The bytes for data to set.
+       * @return This builder for chaining.
        */
       public Builder setDataBytes(
           com.google.protobuf.ByteString value) {
@@ -823,54 +987,87 @@ public final class Message {
         onChanged();
         return this;
       }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
 
       // @@protoc_insertion_point(builder_scope:Command)
     }
 
+    // @@protoc_insertion_point(class_scope:Command)
+    private static final com.zlalanne.Message.Command DEFAULT_INSTANCE;
     static {
-      defaultInstance = new Command(true);
-      defaultInstance.initFields();
+      DEFAULT_INSTANCE = new com.zlalanne.Message.Command();
     }
 
-    // @@protoc_insertion_point(class_scope:Command)
+    public static com.zlalanne.Message.Command getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<Command>
+        PARSER = new com.google.protobuf.AbstractParser<Command>() {
+      @java.lang.Override
+      public Command parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new Command(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<Command> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<Command> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.zlalanne.Message.Command getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
   }
 
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_Command_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_Command_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
     return descriptor;
   }
-  private static com.google.protobuf.Descriptors.FileDescriptor
+  private static  com.google.protobuf.Descriptors.FileDescriptor
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\rmessage.proto\"\203\001\n\007Command\022\"\n\004type\030\001 \002(" +
+      "\n\rmessage.proto\"\223\001\n\007Command\022\"\n\004type\030\001 \002(" +
       "\0162\024.Command.CommandType\022\014\n\004name\030\002 \002(\t\022\014\n" +
-      "\004data\030\003 \001(\t\"8\n\013CommandType\022\016\n\nSTART_TEST" +
-      "\020\000\022\013\n\007RESULTS\020\001\022\014\n\010SHUTDOWN\020\002B\016\n\014com.zla" +
-      "lanne"
+      "\004data\030\003 \002(\t\"H\n\013CommandType\022\021\n\rSWITCH_PER" +
+      "SON\020\000\022\n\n\006ANSWER\020\001\022\014\n\010QUESTION\020\002\022\014\n\010SHUTD" +
+      "OWN\020\003B\016\n\014com.zlalanne"
     };
-    com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
-          public com.google.protobuf.ExtensionRegistry assignDescriptors(
-              com.google.protobuf.Descriptors.FileDescriptor root) {
-            descriptor = root;
-            return null;
-          }
-        };
-    com.google.protobuf.Descriptors.FileDescriptor
+    descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
-        }, assigner);
+        });
     internal_static_Command_descriptor =
       getDescriptor().getMessageTypes().get(0);
     internal_static_Command_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Command_descriptor,
         new java.lang.String[] { "Type", "Name", "Data", });
   }

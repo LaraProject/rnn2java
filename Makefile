@@ -2,11 +2,11 @@
 # Makefile to call protocol buffer compiler for Java/Python
 #
 
-CC          :=protoc
-SRC         :=message.proto
+CC          := protoc
+SRC         := message.proto
 
-PYTHON_OUT  :=python/message_pb2.py
-JAVA_OUT    :=java/src/com/zlalanne/Message.java
+PYTHON_OUT  := python/message_pb2.py
+JAVA_OUT    := src/main/java/com/zlalanne/Message.java
 
 all: $(PYTHON_OUT) $(JAVA_OUT)
 
