@@ -2,7 +2,7 @@ package org.lara.rnn;
 
 import java.util.concurrent.TimeUnit;
 
-public class Main {
+public class ServerTest {
 
     public static void main(String[] args) throws Exception {
         Server server = new Server();

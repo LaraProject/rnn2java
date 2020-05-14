@@ -25,7 +25,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>dependency/</classpathPrefix>
-                            <mainClass>org.lara.rnn.Main</mainClass>
+                            <mainClass>org.lara.rnn.ServerTest</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
