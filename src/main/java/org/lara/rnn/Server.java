@@ -29,11 +29,11 @@ public class Server {
                       .build();
     }
 
-    public Command makeSwitchPerson(int personn) {
+    public Command makeSwitchPerson(int person) {
         return Command.newBuilder()
                       .setType(Command.CommandType.SWITCH_PERSON)
-                      .setName("Switching to personn " + personn )
-                      .setData(Integer.toString(personn))
+                      .setName("Switching to person " + person )
+                      .setData(Integer.toString(person))
                       .build();
     }
 
@@ -70,8 +70,8 @@ public class Server {
         closeSock();
     }
 
-    public void switchPersonn(int personn) {
-        send_without_answer(makeSwitchPerson(personn));
+    public void switchperson(int person) {
+        send_without_answer(makeSwitchPerson(person));
     }
 
     public void openSock() {

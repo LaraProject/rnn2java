@@ -111,8 +111,8 @@ def main():
 				conn.close()
 				break
 			elif (cmd.type == message_pb2.Command.CommandType.SWITCH_PERSON):
-				print("Switching to personn" + cmd.data)
-				personn = int(cmd.data)
+				print("Switching to person" + cmd.data)
+				person = int(cmd.data)
 				enc_model, dec_model = load_inference_models("../models/" + str(person) + "/model_enc.h5", "../models/" + str(person) + "/model_dec.h5")
 				tokenizer = load_tokenizer("../models/" + str(person) + "/tokenizer.pickle")
 				conn.close()
