@@ -12,6 +12,11 @@ sudo apt install protobuf-compiler
 sudo apt-get install maven
 ```
 
+## Compile protobuf
+```
+$ make
+```
+
 ## Setup Python environnement
 ```
 $ virtualenv venv
@@ -22,11 +27,6 @@ $ pip install protobuf tensorflow numpy
 ## Setup Java environnement
 ```
 $ mvn package
-```
-
-## Compile protobuf
-```
-$ make
 ```
 
 ## Run everything
