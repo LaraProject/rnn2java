@@ -11,49 +11,59 @@ import numpy as np
 
 ## RNN part
 
-def load_inference_models(enc_file, dec_file):
+# Load the inference model
+def load_inference_model(enc_file, dec_file):
 	encoder_model = tf.keras.models.load_model(enc_file)
 	decoder_model = tf.keras.models.load_model(dec_file)
-	return encoder_model , decoder_model
+	return (encoder_model, decoder_model)
 
+# Load the tokenizer
 def load_tokenizer(tokenizer_file):
 	with open(tokenizer_file, 'rb') as handle:
 		tokenizer = pickle.load(handle)
 	return tokenizer
 
-def str_to_tokens( sentence : str, tokenizer, maxlen_questions):
+def load_length(length_file):
+	with open(length_file, "r") as f:
+		data = ((f.read()).split(","))
+	return int(data[0]), int(data[1])
+
+# Talking with our Chatbot
+def str_to_tokens(sentence : str ):
 	words = sentence.lower().split()
 	tokens_list = list()
 	for word in words:
 		if word in tokenizer.word_index:
 			tokens_list.append(tokenizer.word_index[word])
 		else:
-			tokens_list.append(tokenizer.word_index["<unk>"])
+			tokens_list.append(tokenizer.word_index['<unk>'])
 	return preprocessing.sequence.pad_sequences([tokens_list],
 			maxlen=maxlen_questions, padding='post')
 
 def answer(question, enc_model, dec_model, tokenizer, maxlen_questions, maxlen_answers):
-	states_values = enc_model.predict( str_to_tokens(question, tokenizer, maxlen_questions))
-	empty_target_seq = np.zeros( ( 1 , 1 ) )
-	empty_target_seq[0, 0] = tokenizer.word_index['start']
+	states_values = enc_model.predict(str_to_tokens(input('Enter question : ')))
+	empty_target_seq = np.zeros((1, 1))
+	empty_target_seq[0, 0] = tokenizer.word_index['<start>']
 	stop_condition = False
 	decoded_translation = ''
-	while not stop_condition :
-		dec_outputs , h , c = dec_model.predict([ empty_target_seq ] + states_values )
-		sampled_word_index = np.argmax( dec_outputs[0, -1, :] )
+	while not stop_condition:
+		(dec_outputs, h, c) = dec_model.predict([empty_target_seq]
+				+ states_values)
+		sampled_word_index = np.argmax(dec_outputs[0, -1, :])
 		sampled_word = None
-		for word , index in tokenizer.word_index.items() :
-			if sampled_word_index == index :
-				decoded_translation += ' {}'.format( word )
+		for (word, index) in tokenizer.word_index.items():
+			if sampled_word_index == index:
+				decoded_translation += ' {}'.format(word)
 				sampled_word = word
-		
-		if sampled_word == 'end' or len(decoded_translation.split()) > maxlen_answers:
+
+		if sampled_word == '<end>' or len(decoded_translation.split()) > maxlen_answers:
 			stop_condition = True
-			
-		empty_target_seq = np.zeros( ( 1 , 1 ) )  
-		empty_target_seq[ 0 , 0 ] = sampled_word_index
-		states_values = [ h , c ] 
-	return decoded_translation[:-4].replace("<unk>","")
+
+		empty_target_seq = np.zeros((1, 1))
+		empty_target_seq[0, 0] = sampled_word_index
+		states_values = [h, c]
+
+	return (decoded_translation[:-5])  # remove end w
 
 ### END RNN PART ###
 
@@ -87,6 +97,7 @@ def main():
 	person = 1
 	enc_model, dec_model = load_inference_models("../models/" + str(person) + "/model_enc.h5", "../models/" + str(person) + "/model_dec.h5")
 	tokenizer = load_tokenizer("../models/" + str(person) + "/tokenizer.pickle")
+	maxlen_questions, maxlen_answers = load_length("../models/" + str(person) + "/length.txt")
 	cmd = message_pb2.Command()
 	over = False
 	while True and (not over):
@@ -101,7 +112,7 @@ def main():
 			cmd.ParseFromString(data)
 			if (cmd.type == message_pb2.Command.CommandType.QUESTION):
 				print("Question : '" + cmd.data + "' received.")
-				conn.send(answer_command(cmd.data, enc_model, dec_model, tokenizer, max_lengths[person-1][0], max_lengths[person-1][1]).SerializeToString())
+				conn.send(answer_command(cmd.data, enc_model, dec_model, tokenizer, maxlen_questions, maxlen_answers).SerializeToString())
 				print("Question answered.")
 				conn.close()
 				break
@@ -115,6 +126,7 @@ def main():
 				person = int(cmd.data)
 				enc_model, dec_model = load_inference_models("../models/" + str(person) + "/model_enc.h5", "../models/" + str(person) + "/model_dec.h5")
 				tokenizer = load_tokenizer("../models/" + str(person) + "/tokenizer.pickle")
+				maxlen_questions, maxlen_answers = load_length("../models/" + str(person) + "/length.txt")
 				conn.close()
 				break
 			elif (cmd.type == message_pb2.Command.CommandType.SHUTDOWN):
