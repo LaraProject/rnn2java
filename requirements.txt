@@ -1,0 +1,3 @@
+protobuf
+tensorflow
+numpy
